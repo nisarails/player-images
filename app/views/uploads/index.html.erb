@@ -1,0 +1,9 @@
+<h1>
+  <%= link_to "click to Play Game"%>
+</h1>
+
+<h6>Upload Images</h6>
+<%= form_for @upload, html: { multipart: true } do |form| %>
+  <%= form.file_field :file, multiple: true %>
+  <%= form.submit %>
+<% end %>
