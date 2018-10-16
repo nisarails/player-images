@@ -1,0 +1,10 @@
+<h1 id="timer"></h1>
+<div id="image">
+  
+</div>
+<%- @uploads.each do |upload|%>
+  <input class="uploads" name="uploads[]" type="hidden" value="<%= upload.file %>"></input>
+<%end%>
+<script type="text/javascript">
+  get_all_uploads();
+</script>
