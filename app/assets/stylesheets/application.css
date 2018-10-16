@@ -13,3 +13,18 @@
  *= require_tree .
  *= require_self
  */
+
+#image img {
+  max-width: 300px;
+  width: 300px;
+  max-height: 300px;
+}
+
+.play-image img{
+  max-width: 150px;
+  max-width: 150px;
+  max-height: 150px;
+}
+.player-table{
+  display: inline-block;
+}

@@ -1,0 +1,15 @@
+<h1>Your all players</h1>
+<div>
+  <%-@plays.each do |play|%>
+    <table class="player-table">
+      <tr>
+        <td class="play-image">
+          <%= image_tag play.path %>
+        </td>
+        <td>
+          <%= play.counter %>
+        </td>
+      </tr>
+    </table>
+  <%end%>
+</div>

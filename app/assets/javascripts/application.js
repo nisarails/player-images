@@ -39,7 +39,7 @@ function show_image(count) {
 
 function get_image(count) {
   img = document.createElement("img")
-  img.src = uploads[count]
+  img.src = uploads[count-1]
   img.setAttribute("id", "show-image")
   img.setAttribute("onclick", "save_it()  ")
   element = document.getElementById("image")
@@ -48,25 +48,43 @@ function get_image(count) {
 
 
 function get_all_uploads(){
-  all_uploads = document.getElementsByClassName("uploads") 
+  all_uploads = document.getElementsByClassName("uploads")
   for(var j = 0; j < all_uploads.length; j++)
   {
     uploads.push(all_uploads[j].value);
   }
   if(uploads.length < 10){
-    remaining = 10 - uploads.length
-    for(var j = 0; j < remaining; j++){
-      uploads.push(all_uploads[j].value);   
-    }
+    repeat_uploads();
   }
+  uploads = uploads.reverse()
   countdown();
 }
 
 function save_it(e) {
   image_path = document.getElementById("show-image").src
   count = document.getElementById("timer").innerHTML
-  
   var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      element = document.getElementById("plays")
+      element.innerHTML = ""
+      element.innerHTML = this.responseText
+    }
+  };
+
   xhttp.open("GET", "/games/new.js?path="+image_path+"&count="+count, true);
   xhttp.send();
+}
+
+function repeat_uploads(){
+  for(var j = 0; j < all_uploads.length; j++){
+    if(uploads.length < 10){
+      uploads.push(all_uploads[j].value);
+    } else{
+      break;
+    }
+  }
+  if(uploads.length < 10){
+    repeat_uploads()
+  }
 }

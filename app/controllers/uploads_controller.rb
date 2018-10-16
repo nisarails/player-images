@@ -5,11 +5,11 @@ class UploadsController < ApplicationController
   end
 
   def create
-    #redirect_to uploads_path if params[:upload].&[:file].nil?
+    redirect_to root_path, flash: {notice: "Please select image"} and return unless params[:upload].present?
     params[:upload][:file].each do |upload_file|
       Upload.create(file: upload_file)
     end
-    redirect_to root_path
+    redirect_to root_path, flash: {notice: "Uploaded."}
   end
 
 end
