@@ -6,10 +6,14 @@ class UploadsController < ApplicationController
 
   def create
     redirect_to root_path, flash: {notice: "Please select image"} and return unless params[:upload].present?
-    params[:upload][:file].each do |upload_file|
-      Upload.create(file: upload_file)
-    end
+    Upload.create_with_file(upload_params)
     redirect_to root_path, flash: {notice: "Uploaded."}
+  end
+
+  private
+
+  def upload_params
+    params.require(:upload).permit(file: [])
   end
 
 end
